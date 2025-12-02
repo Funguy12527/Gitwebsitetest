@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Work_4</title>
+
+    <!-- 复用主站样式 -->
+    <link rel="stylesheet" href="../css/vendor.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <style>
+        /* 页面局部样式 */
+        :root {
+            --gap: 28px;
+            --radius: 10px;
+        }
+        body {
+            background: #fff;
+        }
+        .wrap {
+            max-width: 1200px;
+            margin: 48px auto;
+            padding: 0 20px;
+        }
+        .case-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--gap);
+            align-items: center;
+            margin-bottom: 56px;
+        }
+        .case-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+            object-fit: cover;
+            box-shadow: 0 6px 24px rgba(0,0,0,.08);
+        }
+        .case-title {
+            font-size: 4.0rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+        }
+        .case-heading {
+            font-size: 3.0rem;
+            font-weight: 800;
+            margin: 18px 0 8px;
+        }
+        .case-subtitle {
+            font-size: 2.0rem; /* 略微放大 */
+            font-weight: 700;
+            margin: 18px 0 8px;
+        }
+        .case-text p {
+            margin: 0 0 6px;
+            line-height: 1.7;
+        }
+        .case-text ul {
+            margin: 8px 0 0 18px;
+        }
+        .case-text li {
+            margin: 4px 0;
+        }
+        .case-text a {
+            color: inherit;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        /* 第二段：图片在左（默认）；第一/第三段通过顺序控制图片在右 */
+        .image-right .case-text { order: 1; }
+        .image-right .case-image { order: 2; }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .case-section {
+                grid-template-columns: 1fr;
+            }
+            .image-right .case-text,
+            .image-right .case-image {
+                order: initial; /* 小屏上下排列 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<main class="wrap">
+
+    <!-- 第一块：图片在右，文字在左 -->
+    <section class="case-section image-right">
+        <div class="case-text">
+            <h2 class="case-title">Ergonomic Keyboard</h2>
+            <ul>
+                <li>After experiencing persistent hand discomfort from long typing sessions, I realized my conventional keyboard was a primary contributor to the strain. The unnatural, fixed posture it enforced made it clear that a more ergonomic solution was essential for my long-term health and comfort. This need directly inspired and motivated my project to build this fully customizable, split keyboard, allowing me to position each half perfectly to maintain a neutral and relaxed typing position.</li>
+            </ul>     
+            <h4 class="case-subtitle">Git Hub Repo</h4>
+            <p>Season Recap</p>
+            <p>
+                <a href="https://github.com/Funguy12527/Ergonomic-Split-Keyboard" target="_blank" rel="noopener">
+                    https://github.com/Funguy12527/Ergonomic-Split-Keyboard
+                </a>
+            </p>
+        </div>
+        <div class="case-image">
+            <img src="../images/works/shutterbug/shutterbug (1).jpg" alt="2025 Into The Deep" />
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

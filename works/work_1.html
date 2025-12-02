@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Work_1</title>
+
+    <!-- 复用主站样式 -->
+    <link rel="stylesheet" href="../css/vendor.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <style>
+        /* 页面局部样式 */
+        :root {
+            --gap: 28px;
+            --radius: 10px;
+        }
+        body {
+            background: #fff;
+        }
+        .wrap {
+            max-width: 1200px;
+            margin: 48px auto;
+            padding: 0 20px;
+        }
+        .case-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--gap);
+            align-items: center;
+            margin-bottom: 56px;
+        }
+        .case-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+            object-fit: cover;
+            box-shadow: 0 6px 24px rgba(0,0,0,.08);
+        }
+        .case-title {
+            font-size: 4.0rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+        }
+        .case-heading {
+            font-size: 3.0rem;
+            font-weight: 800;
+            margin: 18px 0 8px;
+        }
+        .case-subtitle {
+            font-size: 2.0rem; /* 略微放大 */
+            font-weight: 700;
+            margin: 18px 0 8px;
+        }
+        .case-text p {
+            margin: 0 0 6px;
+            line-height: 1.7;
+        }
+        .case-text ul {
+            margin: 8px 0 0 18px;
+        }
+        .case-text li {
+            margin: 4px 0;
+        }
+        .case-text a {
+            color: inherit;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        /* 新增：响应式 16:9 播放器容器 */
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,.08);
+            margin: 8px 0 16px;
+        }
+        .video-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        /* 第二段：图片在左（默认）；第一/第三段通过顺序控制图片在右 */
+        .image-right .case-text { order: 1; }
+        .image-right .case-image { order: 2; }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .case-section {
+                grid-template-columns: 1fr;
+            }
+            .image-right .case-text,
+            .image-right .case-image {
+                order: initial; /* 小屏上下排列 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<main class="wrap">
+
+    <!-- 第一块：图片在右，文字在左 -->
+    <section class="case-section image-right">
+        <div class="case-text">
+            <h2 class="case-title">2025 Reefscape Trident</h2>
+            <ul>
+                <li>Winning Alliance</li>
+                <li>Impact award Winner</li>
+                <li>Deans list award winnier</li>
+            </ul>
+
+            <h3 class="case-heading">Robot CAD</h3>
+            <p>
+                <a href="https://cad.onshape.com/documents/e27d482d99aeacc99136af67/w/06c60cac06307db62aba2f4c/e/0023cb9dae41f75f11e723ef?renderMode=0&uiState=6904bcf5a302ba29dfc7d9d8" target="_blank" rel="noopener">
+                    https://cad.onshape.com/documents/e27d482d99aeacc99136af67/w/06c60cac06307db62aba2f4c/e/0023cb9dae41f75f11e723ef?renderMode=0&uiState=6904bcf5a302ba29dfc7d9d8
+                </a>
+            </p>
+
+            <h4 class="case-subtitle">Videos</h4>
+            <p>Robot Reveal</p>
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/R1eGtJUD3uU"
+                        title="Robot Reveal"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
+
+            <p>Shanghai Regional Recap</p>
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/J8RqAdk16GY"
+                        title="Shanghai Regional Recap"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
+
+            <p>Huston World Championship</p>
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/xyY2iHaobzc"
+                        title="Huston World Championship"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="case-image">
+            <img src="../images/works/droplet/droplet (1).jpg" alt="2025 Reefscape Trident" />
+        </div>
+    </section>
+
+    <!-- 第二块：图片在左，文字在右 -->
+    <section class="case-section">
+        <div class="case-image">
+            <img src="../images/works/droplet/droplet (2).jpg" alt="2024 Crescendo Off-SeasonCattail" />
+        </div>
+        <div class="case-text">
+            <h2 class="case-title">2024 Crescendo Off-SeasonCattail</h2>
+
+            <h3 class="case-heading">Robot CAD</h3>
+            <p>
+                <a href="https://cad.onshape.com/documents/4061e9479445207f9c507d72/w/c430ce0cc8f4c7410cde74e5/e/25fd932c752ec1cb11605d13?renderMode=0&uiState=6904c1f80f4ba39ebd48a355" target="_blank" rel="noopener">
+                    https://cad.onshape.com/documents/4061e9479445207f9c507d72/w/c430ce0cc8f4c7410cde74e5/e/25fd932c752ec1cb11605d13?renderMode=0&uiState=6904c1f80f4ba39ebd48a355
+                </a>
+            </p>
+
+            <h4 class="case-subtitle">Videos</h4>
+            <p>Robot Reveal</p>
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/DwWkXiqptSs"
+                        title="Robot Reveal"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- 第三块：图片在右，文字在左 -->
+    <section class="case-section image-right">
+        <div class="case-text">
+            <h2 class="case-title">2024 Crescendo Doritos</h2>
+
+            <h4 class="case-subtitle">Videos</h4>
+            <p>Robot Reveal</p>
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/DwWkXiqptSs"
+                        title="Robot Reveal"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
+
+            <p>Arizona East Regional Recap</p>
+            <div class="video-embed">
+                <iframe src="https://www.youtube-nocookie.com/embed/uIHUnQLDqZg"
+                        title="Arizona East Regional Recap"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+        <div class="case-image">
+            <img src="../images/works/droplet/droplet (3).jpg" alt="2024 Crescendo Doritos" />
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

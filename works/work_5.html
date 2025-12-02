@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Work_5</title>
+
+    <!-- 复用主站样式 -->
+    <link rel="stylesheet" href="../css/vendor.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <style>
+        /* 页面局部样式 */
+        :root {
+            --gap: 28px;
+            --radius: 10px;
+        }
+        body {
+            background: #fff;
+        }
+        .wrap {
+            max-width: 1200px;
+            margin: 48px auto;
+            padding: 0 20px;
+        }
+        .case-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--gap);
+            align-items: start; /* 修改：顶部对齐 */
+            margin-bottom: 56px;
+        }
+        .case-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+            object-fit: cover;
+            box-shadow: 0 6px 24px rgba(0,0,0,.08);
+        }
+        /* 新增：视频外观与图片一致 */
+        .case-image video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+            box-shadow: 0 6px 24px rgba(0,0,0,.08);
+        }
+        .case-title {
+            font-size: 4.0rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+        }
+        .case-heading {
+            font-size: 3.0rem;
+            font-weight: 800;
+            margin: 18px 0 8px;
+        }
+        .case-subtitle {
+            font-size: 2.0rem; /* 略微放大 */
+            font-weight: 700;
+            margin: 18px 0 8px;
+        }
+        .case-text p {
+            margin: 0 0 6px;
+            line-height: 1.7;
+        }
+        .case-text ul {
+            margin: 8px 0 0 18px;
+        }
+        .case-text li {
+            margin: 4px 0;
+        }
+        .case-text a {
+            color: inherit;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        /* 第二段：图片在左（默认）；第一/第三段通过顺序控制图片在右 */
+        .image-right .case-text { order: 1; }
+        .image-right .case-image { order: 2; }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .case-section {
+                grid-template-columns: 1fr;
+            }
+            .image-right .case-text,
+            .image-right .case-image {
+                order: initial; /* 小屏上下排列 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<main class="wrap">
+
+    <!-- 第一块：图片在右，文字在左 -->
+    <section class="case-section image-right">
+        <!-- 左列：第一个视频 -->
+        <div>
+            <div class="case-text">
+                <h3 class="case-heading">Paigu "Dangcing Upon Drums"</h3>
+                <p>
+                    <a href="https://youtu.be/b6vsgAdyaMs" target="_blank" rel="noopener">
+                        https://youtu.be/b6vsgAdyaMs
+                    </a>
+                </p>
+            </div>
+            <div class="case-image">
+                <video src="../images/works/fuji/video (1).mp4" controls preload="metadata"></video>
+            </div>
+        </div>
+
+        <!-- 右列：第二个视频 -->
+        <div>
+            <div class="case-text">
+                <h3 class="case-heading">Lago, Hang in Balance -- Daniel Waples</h3>
+                <p>
+                    <a href="https://youtu.be/9wL79y3ioBo" target="_blank" rel="noopener">
+                        https://youtu.be/9wL79y3ioBo
+                    </a>
+                </p>
+            </div>
+            <div class="case-image">
+                <video src="../images/works/fuji/video (2).mp4" controls preload="metadata"></video>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+</body>
+</html>

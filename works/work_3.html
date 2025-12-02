@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Work_3</title>
+
+    <!-- 复用主站样式 -->
+    <link rel="stylesheet" href="../css/vendor.css" />
+    <link rel="stylesheet" href="../css/styles.css" />
+
+    <style>
+        /* 页面局部样式 */
+        :root {
+            --gap: 28px;
+            --radius: 10px;
+        }
+        body {
+            background: #fff;
+        }
+        .wrap {
+            max-width: 1200px;
+            margin: 48px auto;
+            padding: 0 20px;
+        }
+        .case-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--gap);
+            align-items: center;
+            margin-bottom: 56px;
+        }
+        .case-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: var(--radius);
+            object-fit: cover;
+            box-shadow: 0 6px 24px rgba(0,0,0,.08);
+        }
+        .case-title {
+            font-size: 4.0rem;
+            font-weight: 800;
+            margin: 0 0 12px;
+        }
+        .case-heading {
+            font-size: 3.0rem;
+            font-weight: 800;
+            margin: 18px 0 8px;
+        }
+        .case-subtitle {
+            font-size: 2.0rem; /* 略微放大 */
+            font-weight: 700;
+            margin: 18px 0 8px;
+        }
+        .case-text p {
+            margin: 0 0 6px;
+            line-height: 1.7;
+        }
+        .case-text ul {
+            margin: 8px 0 0 18px;
+        }
+        .case-text li {
+            margin: 4px 0;
+        }
+        .case-text a {
+            color: inherit;
+            text-decoration: underline;
+            word-break: break-all;
+        }
+        /* 新增：响应式 16:9 播放器容器 */
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,.08);
+            margin: 8px 0 16px;
+        }
+        .video-embed iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        /* 第二段：图片在左（默认）；第一/第三段通过顺序控制图片在右 */
+        .image-right .case-text { order: 1; }
+        .image-right .case-image { order: 2; }
+
+        /* 响应式 */
+        @media (max-width: 900px) {
+            .case-section {
+                grid-template-columns: 1fr;
+            }
+            .image-right .case-text,
+            .image-right .case-image {
+                order: initial; /* 小屏上下排列 */
+            }
+        }
+    </style>
+</head>
+<body>
+
+<main class="wrap">
+
+    <!-- 第一块：图片在右，文字在左 -->
+    <section class="case-section image-right">
+        <div class="case-text">
+            <h2 class="case-title">FIRST Global Challenge2024</h2>
+            <ul>
+                <li>World Champion Alliance Captain</li>
+                <li>Einstein Award</li>
+                <li>New Technology Experience</li>
+            </ul>
+
+            <h3 class="case-heading">Robot CAD</h3>
+            <p>
+                <a href="https://cad.onshape.com/documents/4f2cfe6cb9beb1ea578fe7da/w/d361018a8a24585934203fe9/e/d36be1129eee0109aa8dac0b" target="_blank" rel="noopener">
+                    https://cad.onshape.com/documents/4f2cfe6cb9beb1ea578fe7da/w/d361018a8a24585934203fe9/e/d36be1129eee0109aa8dac0b
+                </a>
+            </p>
+            <h3 class="case-heading">Chief Delphi Blog</h3>
+            <p>
+                <a href="https://www.chiefdelphi.com/t/fgc-2024-champion-team-china-engineering-book-cad-code-release/472296?u=funguy" target="_blank" rel="noopener">
+                    https://www.chiefdelphi.com/t/fgc-2024-champion-team-china-engineering-book-cad-code-release/472296?u=funguy
+                </a>
+            </p>
+            <h3 class="case-heading">Tech Binder</h3>
+            <p>
+                <a href="https://drive.google.com/file/d/1I1jpFJEu7bTUIPYPwaZNAXiOEcQPO-rD/view?usp=drive_link" target="_blank" rel="noopener">
+                    https://drive.google.com/file/d/1I1jpFJEu7bTUIPYPwaZNAXiOEcQPO-rD/view?usp=drive_link
+                </a>
+            </p>
+        </div>
+        <div class="case-image">
+            <img src="../images/works/minimalismo/minimalismo (1).jpg" alt="2025 Into The Deep" />
+        </div>
+    </section>
+
+</main>
+
+<script>
+/**
+ * 将 .case-text 中的 YouTube 链接自动替换为内嵌播放器
+ * 支持：youtube.com/watch?v=、youtube.com/shorts/、youtu.be/，保留 t/start 起始时间
+ */
+(function () {
+    function parseStart(v) {
+        if (!v) return null;
+        if (/^\d+$/.test(v)) return parseInt(v, 10);
+        const m = v.match(/(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?/i);
+        if (m) return (parseInt(m[1] || 0) * 3600) + (parseInt(m[2] || 0) * 60) + (parseInt(m[3] || 0));
+        return null;
+    }
+
+    function toYouTubeEmbed(urlStr) {
+        try {
+            const u = new URL(urlStr);
+            if (!/youtube\.com$|youtube\.com:|youtu\.be$|youtu\.be:/.test(u.hostname)) return null;
+
+            let id = null;
+            let start = null;
+
+            if (u.hostname.includes('youtu.be')) {
+                id = u.pathname.split('/')[1] || null;
+                start = u.searchParams.get('t') || u.searchParams.get('start');
+            } else if (u.pathname.startsWith('/watch')) {
+                id = u.searchParams.get('v');
+                start = u.searchParams.get('t') || u.searchParams.get('start');
+            } else if (u.pathname.startsWith('/shorts/')) {
+                id = u.pathname.split('/')[2] || u.pathname.split('/')[1] || null;
+            }
+            if (!id) return null;
+
+            const s = parseStart(start);
+            return `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}${s ? `?start=${s}` : ''}`;
+        } catch {
+            return null;
+        }
+    }
+
+    document.querySelectorAll('.case-text a[href]').forEach(a => {
+        const embed = toYouTubeEmbed(a.href);
+        if (!embed) return;
+
+        const box = document.createElement('div');
+        box.className = 'video-embed';
+        const iframe = document.createElement('iframe');
+        iframe.src = embed;
+        iframe.title = a.textContent?.trim() || 'YouTube Video';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+        iframe.allowFullscreen = true;
+        box.appendChild(iframe);
+
+        a.replaceWith(box);
+    });
+})();
+</script>
+
+</body>
+</html>
