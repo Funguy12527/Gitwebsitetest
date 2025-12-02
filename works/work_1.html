@@ -15,13 +15,20 @@
             --gap: 28px;
             --radius: 10px;
         }
+        html {
+            position: relative;
+            min-height: 100%;
+        }
         body {
+            position: relative;
             background: #fff;
         }
         .wrap {
             max-width: 1200px;
             margin: 48px auto;
-            padding: 0 20px;
+            padding: 40px 20px;
+            position: relative;
+            background: transparent;
         }
         .case-section {
             display: grid;
@@ -37,6 +44,128 @@
             border-radius: var(--radius);
             object-fit: cover;
             box-shadow: 0 6px 24px rgba(0,0,0,.08);
+        }
+        /* 图片轮播 */
+        .image-carousel {
+            position: relative;
+            width: 100%;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: 0 6px 24px rgba(0,0,0,.08);
+            transition: height 1s ease-in-out;
+        }
+        .image-carousel-container {
+            display: flex;
+            width: 600%;
+            animation: slide 18s infinite;
+        }
+        .image-carousel-item {
+            width: 16.666%;
+            flex-shrink: 0;
+        }
+        .image-carousel-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+        }
+        @keyframes slide {
+            0%, 13.33% {
+                transform: translateX(0);
+            }
+            16.66%, 30% {
+                transform: translateX(-16.666%);
+            }
+            33.33%, 46.66% {
+                transform: translateX(-33.333%);
+            }
+            50%, 63.33% {
+                transform: translateX(-50%);
+            }
+            66.66%, 80% {
+                transform: translateX(-66.666%);
+            }
+            83.33%, 96.66% {
+                transform: translateX(-83.333%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        /* 3图片轮播样式 */
+        .image-carousel-container.carousel-3 {
+            width: 300%;
+            animation: slide3 9s infinite;
+        }
+        .image-carousel-container.carousel-3 .image-carousel-item {
+            width: 33.333%;
+        }
+        @keyframes slide3 {
+            0%, 26.66% {
+                transform: translateX(0);
+            }
+            33.33%, 60% {
+                transform: translateX(-33.333%);
+            }
+            66.66%, 93.33% {
+                transform: translateX(-66.666%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        /* 4图片轮播样式 */
+        .image-carousel-container.carousel-4 {
+            width: 400%;
+            animation: slide4 12s infinite;
+        }
+        .image-carousel-container.carousel-4 .image-carousel-item {
+            width: 25%;
+        }
+        @keyframes slide4 {
+            0%, 20% {
+                transform: translateX(0);
+            }
+            25%, 45% {
+                transform: translateX(-25%);
+            }
+            50%, 70% {
+                transform: translateX(-50%);
+            }
+            75%, 95% {
+                transform: translateX(-75%);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        /* 5图片轮播样式 */
+        .image-carousel-container.carousel-5 {
+            width: 500%;
+            animation: slide5 15s infinite;
+        }
+        .image-carousel-container.carousel-5 .image-carousel-item {
+            width: 20%;
+        }
+        @keyframes slide5 {
+            0%, 16% {
+                transform: translateX(0);
+            }
+            20%, 36% {
+                transform: translateX(-20%);
+            }
+            40%, 56% {
+                transform: translateX(-40%);
+            }
+            60%, 76% {
+                transform: translateX(-60%);
+            }
+            80%, 96% {
+                transform: translateX(-80%);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
         .case-title {
             font-size: 4.0rem;
@@ -85,6 +214,25 @@
             height: 100%;
             border: 0;
         }
+        /* 视频并排显示 */
+        .videos-side-by-side {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--gap);
+            margin: 8px 0 16px;
+            width: calc(200% + var(--gap));
+            margin-left: 0;
+        }
+        .video-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .video-item p {
+            margin: 0 0 8px;
+        }
+        .video-item .video-embed {
+            margin: 0;
+        }
         /* 第二段：图片在左（默认）；第一/第三段通过顺序控制图片在右 */
         .image-right .case-text { order: 1; }
         .image-right .case-image { order: 2; }
@@ -97,6 +245,11 @@
             .image-right .case-text,
             .image-right .case-image {
                 order: initial; /* 小屏上下排列 */
+            }
+            .videos-side-by-side {
+                grid-template-columns: 1fr; /* 小屏时视频上下排列 */
+                width: 100%;
+                margin-left: 0;
             }
         }
     </style>
@@ -139,31 +292,75 @@
                         allowfullscreen></iframe>
             </div>
 
-            <p>Huston World Championship</p>
-            <div class="video-embed">
-                <iframe src="https://www.youtube-nocookie.com/embed/xyY2iHaobzc"
-                        title="Huston World Championship"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-            </div>
-            
-            <p>Impact Award Video</p>
-            <div class="video-embed">
-                <iframe src="https://www.youtube-nocookie.com/embed/DbYsYKLx3Eg"
-                        title="Impact Award Video"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
+            <div class="videos-side-by-side">
+                <div class="video-item">
+                    <p>Huston World Championship</p>
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube-nocookie.com/embed/xyY2iHaobzc"
+                                title="Huston World Championship"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <p>Impact Award Video</p>
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube-nocookie.com/embed/DbYsYKLx3Eg"
+                                title="Impact Award Video"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="case-image">
-            <img src="../images/works/droplet/droplet (1).jpg" alt="2025 Reefscape Trident" />
+            <div class="image-carousel">
+                <div class="image-carousel-container">
+                    <div class="image-carousel-item">
+                        <img src="../images/works/droplet/droplet (1).jpg" alt="2025 Reefscape Trident" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/droplet/微信图片_20251026171243.jpg" alt="2025 Reefscape Trident" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/droplet/微信图片_20251026171312.jpg" alt="2025 Reefscape Trident" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/droplet/微信图片_20251026171346.jpg" alt="2025 Reefscape Trident" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/droplet/微信图片_20251026171356.jpg" alt="2025 Reefscape Trident" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/droplet/3eabc1b4d7106e254276c22ddb1a4b27.JPG" alt="2025 Reefscape Trident" />
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- 第二块：图片在左，文字在右 -->
     <section class="case-section">
         <div class="case-image">
-            <img src="../images/works/droplet/droplet (2).jpg" alt="2024 Crescendo Off-SeasonCattail" />
+            <div class="image-carousel">
+                <div class="image-carousel-container carousel-5">
+                    <div class="image-carousel-item">
+                        <img src="../images/works/cattail/215a05552b5b95cb769df05c7e2c75cb.jpg" alt="2024 Crescendo Off-SeasonCattail" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/cattail/95647710a090272d51af8ce246dac5fc.jpg" alt="2024 Crescendo Off-SeasonCattail" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/cattail/befed2a6ba2be78333f49ab0c772dae4.jpg" alt="2024 Crescendo Off-SeasonCattail" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/cattail/微信图片_20251030222016.jpg" alt="2024 Crescendo Off-SeasonCattail" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/cattail/微信图片_20251030222024.jpg" alt="2024 Crescendo Off-SeasonCattail" />
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="case-text">
             <h2 class="case-title">2024 Crescendo Off-SeasonCattail</h2>
@@ -209,11 +406,187 @@
             </div>
         </div>
         <div class="case-image">
-            <img src="../images/works/droplet/droplet (3).jpg" alt="2024 Crescendo Doritos" />
+            <div class="image-carousel">
+                <div class="image-carousel-container carousel-4">
+                    <div class="image-carousel-item">
+                        <img src="../images/works/doritos/2363a217071e2fb98836be3bbfa2e8c3.JPG" alt="2024 Crescendo Doritos" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/doritos/3b4c8e12dbb274eb17d929fa92cdbeba.JPG" alt="2024 Crescendo Doritos" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/doritos/dbb9ed41c474dda4c26b1b411ea2a5ab.JPG" alt="2024 Crescendo Doritos" />
+                    </div>
+                    <div class="image-carousel-item">
+                        <img src="../images/works/doritos/微信图片_20251030222040.jpg" alt="2024 Crescendo Doritos" />
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
 </main>
+
+<script>
+    // Store carousel data for efficient updates
+    const carouselData = new Map();
+    
+    // Function to get the natural height of an image based on carousel width
+    function getImageNaturalHeight(img, carouselWidth) {
+        if (img.naturalHeight && img.naturalWidth && img.naturalWidth > 0) {
+            const aspectRatio = img.naturalHeight / img.naturalWidth;
+            return carouselWidth * aspectRatio;
+        }
+        return img.offsetHeight || 0;
+    }
+    
+    // Initialize carousel data
+    function initializeCarousels() {
+        const carousels = document.querySelectorAll('.image-carousel');
+        
+        carousels.forEach(carousel => {
+            const container = carousel.querySelector('.image-carousel-container');
+            const items = carousel.querySelectorAll('.image-carousel-item');
+            
+            if (!container || items.length === 0) return;
+            
+            const animationDuration = parseFloat(getComputedStyle(container).animationDuration) * 1000 || 18000;
+            const imageCount = items.length;
+            const timePerImage = animationDuration / imageCount;
+            
+            // Pre-calculate heights for all images
+            const carouselWidth = carousel.offsetWidth;
+            const imageHeights = [];
+            
+            items.forEach(item => {
+                const img = item.querySelector('img');
+                if (img) {
+                    const height = getImageNaturalHeight(img, carouselWidth);
+                    imageHeights.push(height);
+                } else {
+                    imageHeights.push(0);
+                }
+            });
+            
+            carouselData.set(carousel, {
+                container,
+                items,
+                animationDuration,
+                imageCount,
+                timePerImage,
+                imageHeights,
+                lastIndex: -1
+            });
+        });
+    }
+    
+    // Get current image index based on animation progress and keyframes
+    function getCurrentImageIndex(progress, imageCount) {
+        if (imageCount === 6) {
+            if (progress <= 13 || progress >= 96.66) return 0;
+            if (progress >= 13 && progress <= 30) return 1;
+            if (progress >= 30 && progress <= 46.66) return 2;
+            if (progress >= 46.66 && progress <= 63.33) return 3;
+            if (progress >= 63.33 && progress <= 80) return 4;
+            if (progress >= 80 && progress <= 96.66) return 5;
+            return 0;
+        } else if (imageCount === 5) {
+            if (progress <= 16 || progress >= 96) return 0;
+            if (progress >= 20 && progress <= 36) return 1;
+            if (progress >= 40 && progress <= 56) return 2;
+            if (progress >= 60 && progress <= 76) return 3;
+            if (progress >= 80 && progress <= 96) return 4;
+            if (progress > 16 && progress < 20) return 1;
+            if (progress > 36 && progress < 40) return 2;
+            if (progress > 56 && progress < 60) return 3;
+            if (progress > 76 && progress < 80) return 4;
+            return 0;
+        } else if (imageCount === 4) {
+            if (progress <= 20 || progress >= 95) return 0;
+            if (progress >= 20 && progress <= 45) return 1;
+            if (progress >= 45 && progress <= 70) return 2;
+            if (progress >= 70 && progress <= 95) return 3;
+            return 0;
+        } else if (imageCount === 3) {
+            if (progress <= 26.66 || progress >= 93.33) return 0;
+            if (progress >= 26.66 && progress <= 60) return 1;
+            if (progress >= 60 && progress <= 93.33) return 2;
+            return 0;
+        }
+        return Math.min(Math.floor((progress / 100) * imageCount), imageCount - 1);
+    }
+    
+    // Function to update carousel height based on visible image
+    function updateCarouselHeights() {
+        carouselData.forEach((data, carousel) => {
+            const carouselWidth = carousel.offsetWidth;
+            if (carouselWidth === 0) return;
+            
+            // Recalculate heights if width changed
+            if (data.lastWidth !== carouselWidth) {
+                data.items.forEach((item, index) => {
+                    const img = item.querySelector('img');
+                    if (img) {
+                        data.imageHeights[index] = getImageNaturalHeight(img, carouselWidth);
+                    }
+                });
+                data.lastWidth = carouselWidth;
+            }
+            
+            // Calculate animation progress percentage
+            const now = performance.now();
+            const cycleTime = data.animationDuration;
+            const timeInCycle = (now % cycleTime);
+            const progress = (timeInCycle / cycleTime) * 100;
+            
+            // Get current image index based on keyframe percentages
+            const currentIndex = getCurrentImageIndex(progress, data.imageCount);
+            
+            // Update height if index changed
+            if (currentIndex !== data.lastIndex && data.imageHeights[currentIndex] > 0) {
+                carousel.style.height = data.imageHeights[currentIndex] + 'px';
+                data.lastIndex = currentIndex;
+            }
+        });
+    }
+    
+    // Animation loop using requestAnimationFrame for smooth updates
+    let animationFrameId;
+    function animate() {
+        updateCarouselHeights();
+        animationFrameId = requestAnimationFrame(animate);
+    }
+    
+    // Wait for all images to load, then start updating
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            initializeCarousels();
+            animate();
+        }, 300);
+    });
+    
+    // Update when images load individually
+    document.querySelectorAll('.image-carousel-item img').forEach(img => {
+        if (img.complete) {
+            if (carouselData.size > 0) {
+                initializeCarousels();
+            }
+        } else {
+            img.addEventListener('load', function() {
+                initializeCarousels();
+            });
+        }
+    });
+    
+    // Also update on window resize
+    let resizeTimeout;
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            initializeCarousels();
+        }, 100);
+    });
+</script>
 
 </body>
 </html>
